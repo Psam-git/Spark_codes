@@ -1,0 +1,114 @@
+pyspark
+help(sc)
+#convering to rdd for spark
+rdd = sc.parallelize(daddy)
+rdd.collect()
+rdd.take(2)
+
+rdd.getNumPartitions()
+
+#helpful spark website
+http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark
+
+#loading a pycharm IDE into spark
+load "/home/training/PycharmProjects/practisespsark/rdd-practise.py"
+
+#using mapping
+datardd = data.map(lambda x: (x,1))
+
+#using reduceByKey
+lettercount = datardd.reduceByKey(lambda x,y: x + y)
+
+#Including the sort by key
+lettercount.sortByKey().collect()
+
+#lettercountswap.sortByKey(ascending=False).collect()
+
+#rdd from text file 
+retail = sc.textFile('/databricks-datasets/online_retail/data-001/data.csv')
+
+#splitting a csv into a list 
+retailraw.map(lambda x : x.split(','))
+
+#splitting into header and body 
+retail.filter(lambda x:x[0]=='InvoiceNo') #header
+retail.filter(lambda x:x[0]!='InvoiceNo') #body
+
+#spark dataframes
+retail = '/databricks-datasets/online_retail/data-001/data.csv'
+ret = sqlContext.read.load(retail,format='com.databricks.spark.csv',header='true',inferschema = 'true')
+
+#when schema is not specified
+ret = sqlContext.read.load(retail,format='com.databricks.spark.csv',header='true',schema = retschema
+
+#importing sql tools
+from pyspark .sql.types import *
+retchema = structType([StructField("InvoiceNo", StringType(), True), \
+                        StructField("StockCode", StringType(), True),])
+
+#creating temporary view
+ret.createOrReplaceTempView('retail')
+
+#sql queries could then be run
+spark.sql('select * from retail').show()
+
+#join inb spark
+origjoin = Flightdelayorigin.join(airportcodes2)
+
+#using sql in spark
+%sql select  from bikeshare  group by season
+
+#calculating average using aggregateByKey
+aggregateByKey((0,0), lambda x, y:(x[0] + y, x[1] + 1),\
+lambda x, y: (x[0]+y[0], x[1]+x[1]))
+
+#group data manipulation
+rdd.mapvalues(lambda av: av[0] /av[1])
+
+#coverting to dataframe
+df = sl.toDF(['product','count'])
+
+#displaying aggregated dataframes
+df.groupBy('product').avg('count').show()
+
+#saving as a text file to hdfs
+slavg.saveAsTextFile('/kubrick/shopping/list'
+
+#defining a function,loading stand alone spark python codes 
+from pyspark import SparkContext, SparkConf
+
+sc = SparkContext
+
+def delim(data):
+    return '\t'.join(str(d) for d in data)
+
+shoppinglist = [('coke',4),('coke',13),('coke',7),('coke',6),('lemonade',3),('lemonade',22),('pepsi',6),('pepsi',15),('Tonic',12),('Tonic',2)]
+sl = sc.parallelize(shoppinglist)
+slagg = sl.aggregateByKey((0,0), lambda x, y:(x[0] + y, x[1] + 1),lambda x, y: (x[0]+y[0], x[1]+x[1]))
+slavg = slagg.mapValues(lambda av: av[0] /av[1])
+slavg = slavg.map(lambda x: delim(x,'#'))
+slavg.saveAsTextFile('/kubrick/shopping/list3')
+
+
+sc.stop()
+
+#running spark from cmd 
+spark-submit
+
+#
+park-submit --master yarn --deploy-mode cluster file:///home/training/PycharmProjects/practisespsark/aggregate-practise.py  '/kubrick/shoppinglist/wednesday'
+
+
+#
+cd $DEV1/scripts
+
+#
+./catchup.sh
+
+#making jupyter notebook for spark
+gedit /home/training/.bashrc
+#remove last comment and refresh
+. /home/training/.bashrc
+
+#using sortBy
+joined.sortBy(lambda x:x[1][1],False).take(10)
